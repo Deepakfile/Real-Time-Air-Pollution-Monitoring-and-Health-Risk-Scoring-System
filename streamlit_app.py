@@ -224,7 +224,7 @@ fig_pm10.update_layout(
     yaxis=dict(
         title_font=dict(color="white", size=18),
         tickfont=dict(color="white", size=14),
-        gridcolor="rgba(255,255,255,0.15)"
+        gridcolor="rgba(255,255,255,0.15)",
         tickmode="linear",
         tick0=0,
         dtick=10
