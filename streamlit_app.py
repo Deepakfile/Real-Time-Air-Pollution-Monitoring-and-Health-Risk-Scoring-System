@@ -139,27 +139,20 @@ map_fig = px.scatter_mapbox(
     hover_data=["pm25", "respiratory_risk"],
     color="pm25",
     zoom=3,
-    height=500
+    height=700
 )
 
 map_fig.update_layout(
     mapbox_style="carto-darkmatter",
-    margin={"r":0,"t":0,"l":0,"b":0},
+    margin={"r": 0, "t": 0, "l": 0, "b": 0},
     paper_bgcolor="rgba(0,0,0,0)",
-    font=dict(color="white", size=16)
-    xaxis=dict(
-    title_font=dict(color="white", size=18),
-    tickfont=dict(color="white", size=14)
-),
-
-yaxis=dict(
-    title_font=dict(color="white", size=18),
-    tickfont=dict(color="white", size=14)
-),
-
-legend=dict(
-    font=dict(color="white", size=14)
-)
+    font=dict(
+        color="white",
+        size=16
+    ),
+    legend=dict(
+        font=dict(color="white", size=14)
+    )
 )
 
 st.plotly_chart(map_fig, use_container_width=True)
@@ -181,20 +174,23 @@ fig_pm25.update_layout(
         color="white",
         size=16
     ),
-    title_font=dict(size=24)
+    title_font=dict(
+        size=24,
+        color="white"
+    ),
     xaxis=dict(
-    title_font=dict(color="white", size=18),
-    tickfont=dict(color="white", size=14)
-),
-
-yaxis=dict(
-    title_font=dict(color="white", size=18),
-    tickfont=dict(color="white", size=14)
-),
-
-legend=dict(
-    font=dict(color="white", size=14)
-)
+        title_font=dict(color="white", size=18),
+        tickfont=dict(color="white", size=14),
+        gridcolor="rgba(255,255,255,0.15)"
+    ),
+    yaxis=dict(
+        title_font=dict(color="white", size=18),
+        tickfont=dict(color="white", size=14),
+        gridcolor="rgba(255,255,255,0.15)"
+    ),
+    legend=dict(
+        font=dict(color="white", size=14)
+    )
 )
 
 st.plotly_chart(fig_pm25, use_container_width=True)
@@ -216,7 +212,23 @@ fig_pm10.update_layout(
         color="white",
         size=16
     ),
-    title_font=dict(size=24)
+    title_font=dict(
+        size=24,
+        color="white"
+    ),
+    xaxis=dict(
+        title_font=dict(color="white", size=18),
+        tickfont=dict(color="white", size=14),
+        gridcolor="rgba(255,255,255,0.15)"
+    ),
+    yaxis=dict(
+        title_font=dict(color="white", size=18),
+        tickfont=dict(color="white", size=14),
+        gridcolor="rgba(255,255,255,0.15)"
+    ),
+    legend=dict(
+        font=dict(color="white", size=14)
+    )
 )
 
 st.plotly_chart(fig_pm10, use_container_width=True)
@@ -237,20 +249,23 @@ risk_fig.update_layout(
         color="white",
         size=16
     ),
-    title_font=dict(size=24)
+    title_font=dict(
+        size=24,
+        color="white"
+    ),
     xaxis=dict(
-    title_font=dict(color="white", size=18),
-    tickfont=dict(color="white", size=14)
-),
-
-yaxis=dict(
-    title_font=dict(color="white", size=18),
-    tickfont=dict(color="white", size=14)
-),
-
-legend=dict(
-    font=dict(color="white", size=14)
-)
+        title_font=dict(color="white", size=18),
+        tickfont=dict(color="white", size=14),
+        gridcolor="rgba(255,255,255,0.15)"
+    ),
+    yaxis=dict(
+        title_font=dict(color="white", size=18),
+        tickfont=dict(color="white", size=14),
+        gridcolor="rgba(255,255,255,0.15)"
+    ),
+    legend=dict(
+        font=dict(color="white", size=14)
+    )
 )
 
 st.plotly_chart(risk_fig, use_container_width=True)
@@ -313,20 +328,23 @@ future_fig.update_layout(
         color="white",
         size=16
     ),
-    title_font=dict(size=24)
+    title_font=dict(
+        size=24,
+        color="white"
+    ),
     xaxis=dict(
-    title_font=dict(color="white", size=18),
-    tickfont=dict(color="white", size=14)
-),
-
-yaxis=dict(
-    title_font=dict(color="white", size=18),
-    tickfont=dict(color="white", size=14)
-),
-
-legend=dict(
-    font=dict(color="white", size=14)
-)
+        title_font=dict(color="white", size=18),
+        tickfont=dict(color="white", size=14),
+        gridcolor="rgba(255,255,255,0.15)"
+    ),
+    yaxis=dict(
+        title_font=dict(color="white", size=18),
+        tickfont=dict(color="white", size=14),
+        gridcolor="rgba(255,255,255,0.15)"
+    ),
+    legend=dict(
+        font=dict(color="white", size=14)
+    )
 )
 
 st.plotly_chart(future_fig, use_container_width=True)
