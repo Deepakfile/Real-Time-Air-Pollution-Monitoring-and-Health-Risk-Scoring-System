@@ -1,4 +1,3 @@
-python id="r8m2v5"
 import os
 import base64
 import streamlit as st
