@@ -1,1 +1,30 @@
-run: python Historical_API.py
+name: Historical Data Pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-historical:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Dependencies
+        run: |
+          pip install requests psycopg2-binary python-dotenv pandas
+
+      - name: Run Historical Pipeline
+        env:
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_PORT: ${{ secrets.DB_PORT }}
+        run: python Historical_API.py
