@@ -14,7 +14,6 @@ st.set_page_config(
     layout="wide"
 )
 
-
 def get_base64(image_path):
     with open(image_path, "rb") as img:
         return base64.b64encode(img.read()).decode()
@@ -33,21 +32,20 @@ st.markdown(
     }}
 
     .block-container {{
-        background-color: rgba(0, 0, 0, 0.65);
+        background-color: rgba(0, 0, 0, 0.70);
         padding: 2rem;
         border-radius: 15px;
     }}
 
-    h1, h2, h3, h4, h5, h6, p, div {{
-        color: white;
+    h1, h2, h3, h4, h5, h6, p, div, label {{
+        color: white !important;
+        font-weight: bold;
     }}
 
     </style>
     """,
     unsafe_allow_html=True
 )
-
-
 
 conn = psycopg2.connect(
     host=os.getenv("DB_HOST"),
@@ -71,8 +69,6 @@ conn.close()
 if df.empty:
     st.warning("No data found in database.")
     st.stop()
-
-
 
 df["recorded_at"] = pd.to_datetime(df["recorded_at"])
 
@@ -102,12 +98,8 @@ latest_df = (
     .tail(1)
 )
 
-
-
 st.title("Real-Time Air Pollution Monitoring Dashboard")
-st.markdown("Live Pollution Analytics + Future Health Risk Trend")
-
-
+st.markdown("### Live Pollution Analytics + Future Health Risk Trend")
 
 col1, col2, col3, col4 = st.columns(4)
 
@@ -131,8 +123,6 @@ col4.metric(
     latest_df["city"].nunique()
 )
 
-
-
 st.subheader("Pollution Monitoring Locations")
 
 map_df = latest_df.merge(
@@ -154,14 +144,14 @@ map_fig = px.scatter_mapbox(
 
 map_fig.update_layout(
     mapbox_style="carto-darkmatter",
-    margin={"r":0,"t":0,"l":0,"b":0}
+    margin={"r":0,"t":0,"l":0,"b":0},
+    paper_bgcolor="rgba(0,0,0,0)",
+    font=dict(color="white", size=16)
 )
 
 st.plotly_chart(map_fig, use_container_width=True)
 
-
-
-st.subheader("📈 PM2.5 Trend Analysis")
+st.subheader("PM2.5 Trend Analysis")
 
 fig_pm25 = px.line(
     df,
@@ -171,10 +161,19 @@ fig_pm25 = px.line(
     title="PM2.5 Levels Over Time"
 )
 
+fig_pm25.update_layout(
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(0,0,0,0)",
+    font=dict(
+        color="white",
+        size=16
+    ),
+    title_font=dict(size=24)
+)
+
 st.plotly_chart(fig_pm25, use_container_width=True)
 
-
-st.subheader("📊 PM10 Trend Analysis")
+st.subheader("PM10 Trend Analysis")
 
 fig_pm10 = px.line(
     df,
@@ -184,11 +183,19 @@ fig_pm10 = px.line(
     title="PM10 Levels Over Time"
 )
 
+fig_pm10.update_layout(
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(0,0,0,0)",
+    font=dict(
+        color="white",
+        size=16
+    ),
+    title_font=dict(size=24)
+)
+
 st.plotly_chart(fig_pm10, use_container_width=True)
 
-
-
-st.subheader(" Respiratory Risk Distribution")
+st.subheader("Respiratory Risk Distribution")
 
 risk_fig = px.histogram(
     latest_df,
@@ -197,11 +204,19 @@ risk_fig = px.histogram(
     title="Current Risk Categories"
 )
 
+risk_fig.update_layout(
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(0,0,0,0)",
+    font=dict(
+        color="white",
+        size=16
+    ),
+    title_font=dict(size=24)
+)
+
 st.plotly_chart(risk_fig, use_container_width=True)
 
-
-
-st.subheader(" 6-Year PM2.5 Future Prediction")
+st.subheader("6-Year PM2.5 Future Prediction")
 
 future_results = []
 
@@ -252,11 +267,18 @@ future_fig = px.bar(
     title="Predicted PM2.5 After 6 Years"
 )
 
+future_fig.update_layout(
+    paper_bgcolor="rgba(0,0,0,0)",
+    plot_bgcolor="rgba(0,0,0,0)",
+    font=dict(
+        color="white",
+        size=16
+    ),
+    title_font=dict(size=24)
+)
+
 st.plotly_chart(future_fig, use_container_width=True)
-
-
 
 st.subheader("Live Pollution Dataset")
 
 st.dataframe(df, use_container_width=True)
-
