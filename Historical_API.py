@@ -1,9 +1,8 @@
 import os
 import requests
 import psycopg2
-import pandas as pd
 from dotenv import load_dotenv
-from datetime import datetime, timedelta
+from datetime import datetime
 
 load_dotenv()
 
@@ -29,7 +28,7 @@ cities = {
     "Bhopal": (23.2599, 77.4126)
 }
 
-start_date = "2023-01-01"
+start_date = "2022-01-01"
 end_date = "2025-12-31"
 
 for city, (lat, lon) in cities.items():
@@ -38,22 +37,22 @@ for city, (lat, lon) in cities.items():
         f"https://air-quality-api.open-meteo.com/v1/air-quality"
         f"?latitude={lat}"
         f"&longitude={lon}"
-        f"&hourly=pm10,pm2_5,carbon_monoxide,nitrogen_dioxide,ozone"
+        f"&daily=pm10,pm2_5,carbon_monoxide,nitrogen_dioxide,ozone"
         f"&start_date={start_date}"
         f"&end_date={end_date}"
     )
 
-    response = requests.get(url)
+    response = requests.get(url, timeout=60)
     data = response.json()
 
-    hourly = data.get("hourly", {})
+    daily = data.get("daily", {})
 
-    times = hourly.get("time", [])
-    pm25_values = hourly.get("pm2_5", [])
-    pm10_values = hourly.get("pm10", [])
-    co_values = hourly.get("carbon_monoxide", [])
-    no2_values = hourly.get("nitrogen_dioxide", [])
-    ozone_values = hourly.get("ozone", [])
+    times = daily.get("time", [])
+    pm25_values = daily.get("pm2_5", [])
+    pm10_values = daily.get("pm10", [])
+    co_values = daily.get("carbon_monoxide", [])
+    no2_values = daily.get("nitrogen_dioxide", [])
+    ozone_values = daily.get("ozone", [])
 
     for i in range(len(times)):
 
@@ -101,4 +100,4 @@ for city, (lat, lon) in cities.items():
 cursor.close()
 conn.close()
 
-print("Historical data insertion completed.")
+print("Historical daily data insertion completed.")
