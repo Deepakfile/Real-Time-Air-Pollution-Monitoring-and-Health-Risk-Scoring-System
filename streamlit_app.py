@@ -104,7 +104,7 @@ latest_df = (
 
 
 
-st.title("🌍 Real-Time Air Pollution Monitoring Dashboard")
+st.title("Real-Time Air Pollution Monitoring Dashboard")
 st.markdown("Live Pollution Analytics + Future Health Risk Trend")
 
 
@@ -133,7 +133,7 @@ col4.metric(
 
 
 
-st.subheader("📍 Pollution Monitoring Locations")
+st.subheader("Pollution Monitoring Locations")
 
 map_df = latest_df.merge(
     location_df,
@@ -141,7 +141,23 @@ map_df = latest_df.merge(
     how="left"
 )
 
-st.map(map_df[["lat", "lon"]])
+map_fig = px.scatter_mapbox(
+    map_df,
+    lat="lat",
+    lon="lon",
+    hover_name="city",
+    hover_data=["pm25", "respiratory_risk"],
+    color="pm25",
+    zoom=3,
+    height=500
+)
+
+map_fig.update_layout(
+    mapbox_style="carto-darkmatter",
+    margin={"r":0,"t":0,"l":0,"b":0}
+)
+
+st.plotly_chart(map_fig, use_container_width=True)
 
 
 
