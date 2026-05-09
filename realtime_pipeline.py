@@ -1,8 +1,12 @@
+import os
 import requests
 import psycopg2
 from datetime import datetime
 import time
 import logging
+from dotenv import load_dotenv
+
+load_dotenv()
 
 logging.basicConfig(
     filename="pipeline.log",
@@ -11,11 +15,11 @@ logging.basicConfig(
 )
 
 conn = psycopg2.connect(
-    host="aws-1-ap-south-1.pooler.supabase.com",
-    database="postgres",
-    user="postgres.zlppwyofklrwyrqpbcgj",
-    password="98Re@ltimeproj",
-    port="6543",
+    host=os.getenv("DB_HOST"),
+    database=os.getenv("DB_NAME"),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    port=os.getenv("DB_PORT"),
     sslmode="require"
 )
 
@@ -41,10 +45,6 @@ conn.commit()
 
 cities = {
     "Delhi": (28.6139, 77.2090),
-    "Ghaziabad": (28.6692, 77.4538),
-    "Noida": (28.5355, 77.3910),
-    "Kanpur": (26.4499, 80.3319),
-    "Lucknow": (26.8467, 80.9462),
     "Mumbai": (19.0760, 72.8777),
     "Nagpur": (21.1458, 79.0882),
     "Bhopal": (23.2599, 77.4126)
@@ -69,10 +69,7 @@ for city, (lat, lon) in cities.items():
     co = current.get("carbon_monoxide")
     no2 = current.get("nitrogen_dioxide")
     ozone = current.get("ozone")
-    recorded_time = current.get("time")
-
-    if recorded_time:
-        recorded_time = datetime.fromisoformat(recorded_time)
+    recorded_time = datetime.fromisoformat(current.get("time"))
 
     if pm25 is None:
         risk = "Unknown"
@@ -103,8 +100,6 @@ for city, (lat, lon) in cities.items():
         risk
     ))
 
-    logging.info(f"{city} inserted | PM2.5: {pm25} | Risk: {risk}")
-
     print(f"{city} | PM2.5: {pm25} | Risk: {risk}")
 
     time.sleep(2)
@@ -114,6 +109,4 @@ conn.commit()
 cursor.close()
 conn.close()
 
-logging.info("Pipeline run completed.")
-
-print("Data inserted successfully into Supabase.")
+print("Data inserted successfully.")
