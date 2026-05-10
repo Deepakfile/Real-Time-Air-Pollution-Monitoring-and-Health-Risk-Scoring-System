@@ -105,7 +105,7 @@ st.sidebar.markdown("### Team Members")
 st.sidebar.write("Khushi Jain")
 st.sidebar.write("Anubhav Jain")
 st.sidebar.write("Deepak Avachitkar")
-)
+
 
 if selected_city == "All Cities":
     city_df = df.copy()
