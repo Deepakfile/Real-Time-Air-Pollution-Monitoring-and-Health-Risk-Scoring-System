@@ -90,12 +90,17 @@ if df.empty:
     st.stop()
 
 df["recorded_at"] = pd.to_datetime(df["recorded_at"])
+city_options = ["All Cities"] + sorted(df["city"].unique())
+
 selected_city = st.sidebar.selectbox(
     "Select City",
-    sorted(df["city"].unique())
+    city_options
 )
 
-city_df = df[df["city"] == selected_city]
+if selected_city == "All Cities":
+    city_df = df.copy()
+else:
+    city_df = df[df["city"] == selected_city].copy()
 
 city_locations = {
     "Delhi": (28.6139, 77.2090),
