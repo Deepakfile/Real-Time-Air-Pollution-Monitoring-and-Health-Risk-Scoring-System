@@ -165,7 +165,11 @@ st.plotly_chart(map_fig, use_container_width=True)
 
 st.subheader("PM2.5 Trend Analysis")
 
-df["month"] = df["recorded_at"].dt.to_period("M").astype(str)
+city_df["month"] = (
+    city_df["recorded_at"]
+    .dt.to_period("M")
+    .astype(str)
+)
 
 monthly_pm25_df = (
     city_df.groupby("month")["pm25"]
@@ -177,8 +181,7 @@ fig_pm25 = px.line(
     monthly_pm25_df,
     x="month",
     y="pm25",
-    color="city",
-    title="Monthly Average PM2.5 Trend"
+    title=f"{selected_city} Monthly Average PM2.5 Trend"
 )
 
 fig_pm25.update_traces(
@@ -205,9 +208,6 @@ fig_pm25.update_layout(
         title_font=dict(color="white", size=18),
         tickfont=dict(color="white", size=14),
         gridcolor="rgba(255,255,255,0.15)"
-    ),
-    legend=dict(
-        font=dict(color="white", size=14)
     )
 )
 
@@ -215,7 +215,11 @@ st.plotly_chart(fig_pm25, use_container_width=True)
 
 st.subheader("PM10 Trend Analysis")
 
-df["month"] = df["recorded_at"].dt.to_period("M").astype(str)
+city_df["month"] = (
+    city_df["recorded_at"]
+    .dt.to_period("M")
+    .astype(str)
+)
 
 monthly_df = (
     city_df.groupby("month")["pm10"]
@@ -227,8 +231,7 @@ fig_pm10 = px.line(
     monthly_df,
     x="month",
     y="pm10",
-    color="city",
-    title="Monthly Average PM10 Trend"
+    title=f"{selected_city} Monthly Average PM10 Trend"
 )
 
 fig_pm10.update_traces(
@@ -255,9 +258,6 @@ fig_pm10.update_layout(
         title_font=dict(color="white", size=18),
         tickfont=dict(color="white", size=14),
         gridcolor="rgba(255,255,255,0.15)"
-    ),
-    legend=dict(
-        font=dict(color="white", size=14)
     )
 )
 
