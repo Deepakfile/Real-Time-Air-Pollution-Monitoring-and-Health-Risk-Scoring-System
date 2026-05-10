@@ -41,7 +41,25 @@ st.markdown(
         color: white !important;
         font-weight: bold;
     }}
-    
+
+    section[data-testid="stSidebar"] {{
+        background-color: rgba(0, 0, 0, 0.88);
+    }}
+
+    section[data-testid="stSidebar"] * {{
+        color: white !important;
+    }}
+
+    .stSelectbox div[data-baseweb="select"] > div {{
+        background-color: rgba(30,30,30,0.95) !important;
+        color: white !important;
+        font-weight: bold !important;
+        border-radius: 10px !important;
+    }}
+
+    .stSelectbox svg {{
+        fill: white !important;
+    }}
 
     </style>
     """,
