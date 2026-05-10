@@ -103,10 +103,9 @@ st.sidebar.markdown("---")
 st.sidebar.markdown(
     """
     ### Team Members
-    Khushi Jain
-    Anubhav Jain
-    Deepak Avachitkar  
-    
+    st.sidebar.write("Khushi Jain")
+st.sidebar.write("Anubhav jain")
+st.sidebar.write("Deepak Avachitkar")
     
     """
 )
