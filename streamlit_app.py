@@ -169,7 +169,7 @@ map_fig = px.scatter_mapbox(
     hover_data=["pm25", "respiratory_risk"],
     color="pm25",
     zoom=3,
-    height=700
+    height=400
 )
 
 map_fig.update_layout(
