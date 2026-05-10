@@ -100,14 +100,11 @@ selected_city = st.sidebar.selectbox(
 )
 st.sidebar.markdown("---")
 
-st.sidebar.markdown(
-    """
-    ### Team Members
-    st.sidebar.write("Khushi Jain")
-st.sidebar.write("Anubhav jain")
+st.sidebar.markdown("### Team Members")
+
+st.sidebar.write("Khushi Jain")
+st.sidebar.write("Anubhav Jain")
 st.sidebar.write("Deepak Avachitkar")
-    
-    """
 )
 
 if selected_city == "All Cities":
