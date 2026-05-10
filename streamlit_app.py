@@ -41,18 +41,7 @@ st.markdown(
         color: white !important;
         font-weight: bold;
     }}
-    .stSelectbox div[data-baseweb="select"] > div {
-    color: black !important;
-    font-weight: bold !important;
-}
-
-.stSelectbox svg {
-    fill: black !important;
-}
-
-.stSelectbox input {
-    color: black !important;
-}
+    
 
     </style>
     """,
