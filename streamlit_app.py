@@ -25,11 +25,13 @@ st.markdown(
     <style>
 
     .stApp {{
-        background-image: url("data:image/png;base64,{bg_image}");
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-    }}
+    background-image: url("data:image/png;base64,{bg_image}");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}}
 
     .block-container {{
         background-color: rgba(0, 0, 0, 0.70);
