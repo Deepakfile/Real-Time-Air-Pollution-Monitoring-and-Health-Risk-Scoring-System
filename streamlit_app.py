@@ -197,12 +197,24 @@ st.plotly_chart(fig_pm25, use_container_width=True)
 
 st.subheader("PM10 Trend Analysis")
 
+df["month"] = df["recorded_at"].dt.to_period("M").astype(str)
+
+monthly_df = (
+    df.groupby(["month", "city"])["pm10"]
+    .mean()
+    .reset_index()
+)
+
 fig_pm10 = px.line(
-    df,
-    x="recorded_at",
+    monthly_df,
+    x="month",
     y="pm10",
     color="city",
-    title="PM10 Levels Over Time"
+    title="Monthly Average PM10 Trend"
+)
+
+fig_pm10.update_traces(
+    line=dict(width=4)
 )
 
 fig_pm10.update_layout(
