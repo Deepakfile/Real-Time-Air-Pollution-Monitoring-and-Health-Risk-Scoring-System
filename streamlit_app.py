@@ -98,6 +98,18 @@ selected_city = st.sidebar.selectbox(
     "Select City",
     city_options
 )
+st.sidebar.markdown("---")
+
+st.sidebar.markdown(
+    """
+    ### Team Members
+
+    Deepak Avachitkar  
+    Member 2 Name  
+    Member 3 Name  
+    
+    """
+)
 
 if selected_city == "All Cities":
     city_df = df.copy()
