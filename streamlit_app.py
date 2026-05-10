@@ -168,7 +168,7 @@ st.subheader("PM2.5 Trend Analysis")
 df["month"] = df["recorded_at"].dt.to_period("M").astype(str)
 
 monthly_pm25_df = (
-    city_df.groupby(["month", "city"])["pm25"]
+    city_df.groupby("month")["pm25"]
     .mean()
     .reset_index()
 )
@@ -218,7 +218,7 @@ st.subheader("PM10 Trend Analysis")
 df["month"] = df["recorded_at"].dt.to_period("M").astype(str)
 
 monthly_df = (
-    city_df.groupby(["month", "city"])["pm10"]
+    city_df.groupby("month")["pm10"]
     .mean()
     .reset_index()
 )
