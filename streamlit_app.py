@@ -71,6 +71,12 @@ if df.empty:
     st.stop()
 
 df["recorded_at"] = pd.to_datetime(df["recorded_at"])
+selected_city = st.sidebar.selectbox(
+    "Select City",
+    sorted(df["city"].unique())
+)
+
+city_df = df[df["city"] == selected_city]
 
 city_locations = {
     "Delhi": (28.6139, 77.2090),
@@ -162,7 +168,7 @@ st.subheader("PM2.5 Trend Analysis")
 df["month"] = df["recorded_at"].dt.to_period("M").astype(str)
 
 monthly_pm25_df = (
-    df.groupby(["month", "city"])["pm25"]
+    city_df.groupby(["month", "city"])["pm25"]
     .mean()
     .reset_index()
 )
@@ -212,7 +218,7 @@ st.subheader("PM10 Trend Analysis")
 df["month"] = df["recorded_at"].dt.to_period("M").astype(str)
 
 monthly_df = (
-    df.groupby(["month", "city"])["pm10"]
+    city_df.groupby(["month", "city"])["pm10"]
     .mean()
     .reset_index()
 )
