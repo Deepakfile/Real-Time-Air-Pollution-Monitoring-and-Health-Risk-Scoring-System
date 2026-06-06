@@ -34,6 +34,9 @@ for city in df["city"].unique():
 
     city_df = city_df.sort_values("recorded_at")
 
+    if len(city_df) < 2:
+        continue
+
     city_df["days"] = (
         city_df["recorded_at"] - city_df["recorded_at"].min()
     ).dt.days
@@ -47,6 +50,11 @@ for city in df["city"].unique():
     future_day = city_df["days"].max() + (365 * 6)
 
     predicted_pm25 = model.predict([[future_day]])[0]
+
+    current_avg = city_df["pm25"].mean()
+
+    if predicted_pm25 < 5:
+        predicted_pm25 = max(current_avg * 0.5, 5)
 
     if predicted_pm25 > 150:
         risk = "Severe"
